@@ -5,6 +5,9 @@ require('dotenv').config();
 
 var app = express();
 const port = process.env.PORT || 3000;
+var production = 'https://liflow.herokuapp.com/';
+var development = 'http://localhost';
+const address = process.env.ENV ? production : development;
 
 app.use(bodyParser.json());
 
@@ -20,9 +23,8 @@ var server = app.listen(3000, function() {
 });
 
 var reqTimer = setTimeout(function wakeUp() {
-    request(`${process.env.HOST}.herokuapp.com`, function() {
-        console.log(`${JSON.stringify(process.env)}`);
+    request(`${address}.herokuapp.com`, function() {
         console.log('WAKE UP DYNO');
     });
-    return reqTimer = setTimeout(wakeUp, 12);
- }, 12);
+    return reqTimer = setTimeout(wakeUp, 1200000);
+ }, 1200000);
