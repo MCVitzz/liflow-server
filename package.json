@@ -4,14 +4,15 @@
   "description": "App to keep my shit together",
   "main": "server.js",
   "scripts": {
-    "test": "node server"
+    "test": "node server",
+    "start":"node server"
   },
   "keywords": [
     "node",
     "liflow",
     "server",
     "app",
-    "azure"
+    "MongoDB"
   ],
   "author": "Vasco Pereira",
   "license": "MIT",

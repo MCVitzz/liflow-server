@@ -23,7 +23,7 @@ var server = app.listen(3000, function() {
 });
 
 var reqTimer = setTimeout(function wakeUp() {
-    request(`${address}.herokuapp.com`, function() {
+    request(`${address}`, function() {
         console.log('WAKE UP DYNO');
     });
     return reqTimer = setTimeout(wakeUp, 1200000);
