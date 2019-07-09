@@ -18,7 +18,8 @@ app.get('/', function(req, res) {
 require('./models/db')(app);
 require('./routes/users')(app);
 
-var server = app.listen(3000, function() {
+var server = app.listen(port, function() {
+    console.log(app.adress());
     console.log(`Server listening at ${port}`);
 });
 
