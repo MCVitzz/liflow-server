@@ -12,7 +12,7 @@ module.exports = function(app) {
         User.findOne({'Username': user}, function(err, docs) {
             if(err)
                 throw err;
-            res.send(docs);
+            res.json(docs);
         });
     });
 };
