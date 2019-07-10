@@ -1,9 +1,18 @@
 var User = require('../models/users');
 
-module.exports = function(app, db) {
+module.exports = function(app) {
     app.post('/users/add', function(req, res) {
         var user = new User(req.body);
         user.save();
         res.send('User added successfully.');
+    });
+
+    app.get('/users/get', function(req, res) {
+        var user = req.query.user;
+        User.findOne({'Username': user}, function(err, docs) {
+            if(err)
+                throw err;
+            res.send(docs);
+        });
     });
 };
