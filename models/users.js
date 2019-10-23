@@ -16,9 +16,6 @@ var userSchema = new Schema({
     },
     Password: {
         type:String
-    },
-    PasswordSalt: {
-        type:String
     }
 });
 
