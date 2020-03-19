@@ -1,4 +1,5 @@
-var Lists = require('../models/lists');
+const router = require('express').Router();
+const Lists = require('../models/lists');
 
 module.exports = function(app) {
     app.post('/lists/add', function(req, res) {

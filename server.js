@@ -1,31 +1,29 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var request = require('request');
-require('dotenv').config();
+const express = require('express');
+const app = express();
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
-var app = express();
-const port = process.env.PORT || 3000;
-var production = 'https://liflow.herokuapp.com/';
-var development = 'http://localhost';
-const address = process.env.ENV ? production : development;
+//Import routes
+const authRoute = require('./routes/auth');
+const listsRoute = require('./routes/lists');
 
-app.use(bodyParser.json());
+//Configure environment variables and server port
+dotenv.config();
+const PORT = process.env.PORT || 3000;
 
-app.get('/', function(req, res) {
+//Connect to DB
+mongoose.connect(
+    process.env.DB_CONNECT, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    }, () => console.log('Connected to Database'));
+
+//Main request
+app.get('/', function (req, res) {
     res.send('Liflow API');
 });
 
-require('./models/db')(app);
-require('./routes/users')(app);
-require('./routes/lists')(app);
+//Middleware
+app.use(express.json());
 
-var server = app.listen(port, function() {
-    console.log(`Server listening at ${port}`);
-});
-
-var reqTimer = setTimeout(function wakeUp() {
-    request(`${address}`, function() {
-        console.log('WAKE UP DYNO');
-    });
-    return reqTimer = setTimeout(wakeUp, 1200000);
- }, 1200000);
+app.listen(PORT, () => console.log(`Running on port ${PORT}`));
